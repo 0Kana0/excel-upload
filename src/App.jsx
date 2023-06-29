@@ -143,6 +143,12 @@ function App() {
       }
 
       AddTripDetailFromExcel(allTripData)
+        .then((res) => {
+          console.log(res.data)
+        })
+        .catch((err) => {
+          console.log(err)
+        })
       // console.log('Add TripDetail Success');
     }
     else{
