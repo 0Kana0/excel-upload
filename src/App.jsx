@@ -23,7 +23,7 @@ function App() {
         } 
       }
       else{
-        setExcelFileError('Please select only excel file types');
+        setExcelFileError('อัพโหลดได้เเค่ไฟล์สกุล .xlsx');
         setExcelFile(null);
       }
     }
@@ -36,17 +36,19 @@ function App() {
     e.preventDefault();
     if(excelFile!==null){
       const workbook = XLSX.read(excelFile,{type:'buffer'});
-      const worksheetName = workbook.SheetNames[0];
+      const worksheetName = workbook.SheetNames[2];
       const worksheet=workbook.Sheets[worksheetName];
 
       let checkOne = ''
       let checkTwo = ''
       let checkThree = ''
+      let checkFour = ''
       let count = 3
-      while (checkOne != undefined && checkTwo != undefined && checkThree != undefined) {
+      while (checkOne != undefined && checkTwo != undefined && checkThree != undefined && checkFour != undefined) {
         checkOne = worksheet[`D${count + 1}`];
         checkTwo = worksheet[`E${count + 1}`];
         checkThree = worksheet[`I${count + 1}`];
+        checkFour = worksheet[`L${count + 1}`];
         count = count + 1
       }
 
@@ -111,7 +113,7 @@ function App() {
         if (network == undefined) {
           networkData = team.v.slice(3)
         } else {
-          networkData = remark.v
+          networkData = network.v
         }
 
         console.log({
@@ -170,7 +172,8 @@ function App() {
         <form className='form-group' autoComplete="off" onSubmit={handleSubmit}>
           <label><h5>Upload Excel file</h5></label>
           <br></br>
-          <input type='file' className='form-control' onChange={handleFile} required></input>        
+          <input type='file' className='form-control' onChange={handleFile} required></input>   
+          {excelFileError&&<div className='text-danger' style={{marginTop:5+'px'}}>{excelFileError}</div>}     
           <button type='submit' className='btn btn-success' style={{marginTop:5+'px'}}>Submit</button>          
         </form>
       </div>
