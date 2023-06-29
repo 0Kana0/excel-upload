@@ -39,10 +39,14 @@ function App() {
       const worksheetName = workbook.SheetNames[0];
       const worksheet=workbook.Sheets[worksheetName];
 
-      let check = ''
+      let checkOne = ''
+      let checkTwo = ''
+      let checkThree = ''
       let count = 3
-      while (check != undefined) {
-        check = worksheet[`D${count + 1}`];
+      while (checkOne != undefined && checkTwo != undefined && checkThree != undefined) {
+        checkOne = worksheet[`D${count + 1}`];
+        checkTwo = worksheet[`E${count + 1}`];
+        checkThree = worksheet[`I${count + 1}`];
         count = count + 1
       }
 
