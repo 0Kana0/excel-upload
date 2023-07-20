@@ -59,6 +59,8 @@ function App() {
         const date = worksheet[`D${index}`];
         const customer = worksheet[`E${index}`];
         const type = worksheet[`I${index}`];
+        const serviceType = worksheet[`J${index}`];
+        const vehicleType = worksheet[`K${index}`];
         const plateNumber = worksheet[`L${index}`];
         const driverOne = worksheet[`M${index}`];
         const driverTwo = worksheet[`N${index}`];
@@ -69,12 +71,26 @@ function App() {
         const remark = worksheet[`AB${index}`];
 
         // ถ้าข้อมูลมีการเว้นว่าง ให้เปลี่ยนเป็น null เพื่อป้องกัน Error
+        let serviceTypeData
+        let vehicleTypeData
         let totalDistanceData
         let remarkData  
         let driverOneData
         let driverTwoData
         let numberOfTripData
         let networkData
+
+        if (serviceType == undefined) {
+          serviceTypeData = null
+        } else {
+          serviceTypeData = serviceType.v
+        }
+
+        if (vehicleType == undefined) {
+          vehicleTypeData = null
+        } else {
+          vehicleTypeData = vehicleType.v
+        }
 
         if (driverOne == undefined) {
           driverOneData = null
@@ -120,6 +136,8 @@ function App() {
           date: date.w,
           customer: customer.v,
           type: type.v,
+          serviceType: serviceTypeData,
+          vehicleType: vehicleTypeData,
           plateNumber: plateNumber.v,
           team: team.v,
           network: networkData,
@@ -134,6 +152,8 @@ function App() {
           date: date.w,
           customer: customer.v,
           type: type.v,
+          serviceType: serviceTypeData,
+          vehicleType: vehicleTypeData,
           plateNumber: plateNumber.v,
           team: team.v,
           network: networkData,
@@ -155,7 +175,7 @@ function App() {
         .catch((err) => {
           console.log(err)
         })
-      // console.log('Add TripDetail Success');
+      console.log('Add TripDetail Success');
     }
     else{
       setExcelData(null);
